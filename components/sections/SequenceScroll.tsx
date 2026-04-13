@@ -22,7 +22,7 @@ export default function SequenceScroll() {
   const [progress, setProgress] = useState(0);
   const isMobile = useIsMobile();
   const totalFrames = 192;
-  const { updateProgress, setLoaded } = useLoading();
+  const { isLoaded, updateProgress, setLoaded } = useLoading();
 
   // Track scroll progress through the 500vh container (for canvas frames)
   const { scrollYProgress } = useScroll({
@@ -118,6 +118,11 @@ export default function SequenceScroll() {
       render(frameIndex.get());
     };
 
+    // If images just finished loading, force an initial render immediately
+    if (isLoaded) {
+      updateCanvasSize();
+    }
+
     window.addEventListener("resize", updateCanvasSize);
     updateCanvasSize();
 
@@ -129,7 +134,7 @@ export default function SequenceScroll() {
       unsubscribe();
       window.removeEventListener("resize", updateCanvasSize);
     };
-  }, [images, frameIndex, isMobile]);
+  }, [images, frameIndex, isMobile, isLoaded]);
 
   // Compute overlay opacities from manual progress
   const op1a = computeOpacity(progress, 0.01, 0.08, 0.24); // Name
