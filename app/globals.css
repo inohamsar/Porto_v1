@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  
+  --font-syne: "var(--font-syne)";
+  --font-manrope: "var(--font-manrope)";
+  --font-plus-jakarta: "var(--font-plus-jakarta-sans)";
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --font-syne: var(--font-syne);
+  --font-manrope: var(--font-manrope);
+  --font-plus-jakarta: var(--font-plus-jakarta-sans);
+  
+  /* Custom Spacing & Utilities */
+  --spacing-container: 2rem;
+}
+
+body {
+  background: black;
+  color: white;
+  font-family: var(--font-manrope), sans-serif;
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4, h5, h6, .font-syne {
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .clip-path-reveal {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  
+  .text-outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+    font-family: var(--font-syne), sans-serif;
+    text-transform: uppercase;
+  }
+}
+
+/* Lenis CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Hide Navbar when Gallery is Open */
+.gallery-open nav {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out;
+}
+
