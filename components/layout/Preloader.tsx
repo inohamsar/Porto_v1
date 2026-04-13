@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLoading } from "@/context/LoadingContext";
 import { useScroll } from "./SmoothScroll";
 
 export default function Preloader() {
-  const [progress, setProgress] = useState(0);
+  const [visualProgress, setVisualProgress] = useState(0);
   const [complete, setComplete] = useState(false);
   const lenis = useScroll();
+  const { progress: realProgress, isLoaded } = useLoading();
 
   useEffect(() => {
     if (!complete) {
@@ -21,20 +23,35 @@ export default function Preloader() {
     };
   }, [complete, lenis]);
 
+  // Visual progress logic: combines real progress with smooth fake increments
   useEffect(() => {
     const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
+      setVisualProgress((prev) => {
+        // We want the visual progress to be "capped" by real progress,
+        // but it can be slightly behind to look smoother.
+        if (prev < realProgress) {
+          const diff = realProgress - prev;
+          const increment = Math.max(1, Math.floor(diff * 0.1));
+          return Math.min(prev + increment, 100);
+        }
+
+        if (prev >= 100 && isLoaded) {
           clearInterval(timer);
-          setTimeout(() => setComplete(true), 500);
+          setTimeout(() => setComplete(true), 800);
           return 100;
         }
-        return prev + Math.floor(Math.random() * 10) + 1;
+
+        // Even if we don't have real progress yet, let it crawl up to 90%
+        if (prev < 90) {
+          return prev + 1;
+        }
+
+        return prev;
       });
-    }, 100);
+    }, 50);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [realProgress, isLoaded]);
 
   return (
     <AnimatePresence>
@@ -56,13 +73,13 @@ export default function Preloader() {
                   InoHamsar
                 </motion.h2>
               </div>
-              <div className="text-2xl md:text-4xl font-syne">{Math.min(progress, 100)}%</div>
+              <div className="text-2xl md:text-4xl font-syne">{Math.min(visualProgress, 100)}%</div>
             </div>
 
             <div className="h-[2px] w-full bg-white/20 overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: `${progress}%` }}
+                animate={{ width: `${visualProgress}%` }}
                 className="h-full bg-white"
               />
             </div>

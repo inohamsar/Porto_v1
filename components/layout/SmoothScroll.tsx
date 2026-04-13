@@ -5,6 +5,8 @@ import Lenis from "lenis";
 
 import { useIsMobile } from "@/hooks/use-is-mobile";
 
+import { LoadingProvider } from "@/context/LoadingContext";
+
 const ScrollContext = createContext<Lenis | null>(null);
 
 export const useScroll = () => useContext(ScrollContext);
@@ -40,8 +42,10 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
   }, [isMobile]);
 
   return (
-    <ScrollContext.Provider value={lenis}>
-      {children}
-    </ScrollContext.Provider>
+    <LoadingProvider>
+      <ScrollContext.Provider value={lenis}>
+        {children}
+      </ScrollContext.Provider>
+    </LoadingProvider>
   );
 }

@@ -5,6 +5,8 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 
+import { useLoading } from "@/context/LoadingContext";
+
 // Helper: compute fade-in/out opacity from progress
 function computeOpacity(progress: number, fadeIn: number, peak: number, fadeOut: number): number {
   if (progress < fadeIn) return 0;
@@ -20,6 +22,7 @@ export default function SequenceScroll() {
   const [progress, setProgress] = useState(0);
   const isMobile = useIsMobile();
   const totalFrames = 192;
+  const { updateProgress, setLoaded } = useLoading();
 
   // Track scroll progress through the 500vh container (for canvas frames)
   const { scrollYProgress } = useScroll({
@@ -71,14 +74,23 @@ export default function SequenceScroll() {
       img.src = `/sequence/sequentially-${frameNum}.webp`;
       img.onload = () => {
         loadedCount++;
+        const currentProgress = (loadedCount / totalFrames) * 100;
+        updateProgress(currentProgress);
+
         if (loadedCount === totalFrames) {
-          // Images loaded
+          setLoaded(true);
         }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        const currentProgress = (loadedCount / totalFrames) * 100;
+        updateProgress(currentProgress);
+        if (loadedCount === totalFrames) setLoaded(true);
       };
       loadedImages.push(img);
     }
     setImages(loadedImages);
-  }, []);
+  }, [updateProgress, setLoaded, totalFrames]);
 
   // Handle Canvas Rendering
   useEffect(() => {
