@@ -7,7 +7,7 @@ import RevealHeading from "../motion/RevealHeading";
 import Separator from "../ui/Separator";
 import TypingBadge from "../motion/TypingBadge";
 
-const text = "Saya membangun sistem digital mandiri yang bekerja secara otomatis untuk bisnis Anda. Dari mengelola infrastruktur server yang aman hingga menciptakan AI Agent yang mampu menangani konsumen layaknya asisten manusia, saya memastikan teknologi dan bisnis berjalan selaras. Sebagai pengembang perangkat lunak sekaligus ahli periklanan digital, saya tidak hanya membangun aplikasi, tetapi juga memastikan sistem tersebut efektif mendatangkan profit dan meningkatkan efisiensi operasional secara maksimal.";
+const text = "Menghadirkan transformasi digital melalui pengembangan sistem yang ditenagai oleh AI untuk menciptakan standar baru dalam efisiensi bisnis. Saya berfokus pada pembangunan ekosistem digital yang mampu beradaptasi dengan kebutuhan masa kini, menggunakan asisten AI dan sistem cerdas lainnya untuk mempercepat alur kerja dan meningkatkan profitabilitas. Setiap sistem yang saya bangun adalah investasi strategis untuk memastikan bisnis Anda berjalan lebih produktif dan kompetitif.";
 
 export default function About() {
   const ref = useRef(null);

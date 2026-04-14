@@ -47,7 +47,7 @@ export default function Contact() {
     offset: ["start end", "end start"],
   });
 
-  const descriptionText = "Kombinasi AI Engineering dan Cloud Architecture siap saya dedikasikan untuk mengakselerasi efisiensi dan inovasi bisnis Anda ke level berikutnya.";
+  const descriptionText = "Kombinasi AI Engineering dan strategi digital yang saya tawarkan dirancang untuk memastikan sistem bekerja lebih keras untuk bisnis Anda. Saatnya beralih ke efisiensi maksimal yang membuka ruang lebih besar bagi pertumbuhan profitabilitas Anda.";
   const words = descriptionText.split(" ");
 
   const containerVariants = {
@@ -108,7 +108,7 @@ export default function Contact() {
         <div className="flex flex-col">
           <RevealHeading
             text="Siap Membangun Masa Depan Digital & AI?"
-            className="text-3xl md:text-4xl lg:text-8xl font-syne uppercase tracking-tighter leading-[0.9]"
+            className="text-[1.6rem] md:text-4xl lg:text-8xl font-syne uppercase tracking-tighter leading-[0.9]"
           />
           <motion.p
             ref={descriptionRef}

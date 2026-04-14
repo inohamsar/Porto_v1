@@ -7,7 +7,7 @@ import { Code, Globe, Search, BarChart, Palette, Megaphone } from "lucide-react"
 import RevealHeading from "../motion/RevealHeading";
 import Separator from "../ui/Separator";
 
-const text = "Solusi teknologi end-to-end yang mengintegrasikan kecerdasan buatan, infrastruktur cloud yang aman, dan strategi digital untuk mendorong efisiensi dan profitabilitas bisnis Anda.";
+const text = "Implementasi kecerdasan buatan yang tidak hanya terbatas pada layanan konsumen, tetapi juga sebagai asisten produktivitas internal. Saya membangun AI yang mampu mengolah data, membantu pengambilan keputusan, dan mempercepat alur kerja tim.";
 
 const services = [
   {
