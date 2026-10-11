@@ -34,8 +34,7 @@ Below is the visual and technical roadmap of the portfolio, presented in the ord
 - **Technology**: `framer-motion` for scroll-triggered directional reveals (Left-to-Right/Right-to-Left). Nested `AnimatePresence` driven modals (`ProjectModal.tsx`) with strict `data-lenis-prevent` scroll containment.
 
 ### 5. **Interactive Bio (`components/sections/About.tsx`)**
-- **The Experience**: Personal backstory presented through staggered Kinetic Typography, culminating in a dramatic, delayed reveal of a high-tech "World Network" globe after the text finishes its typing sequence.
-- **Visuals (Radial Masking)**: Replaced traditional `border-radius` with a feathered CSS `radial-gradient` mask (`mask-image`). This completely eliminates the underlying image's hard square background, allowing the world globe to blend seamlessly into the pure black void of the site without clipping its outer orbital rings.
+- **The Experience**: Personal backstory presented through staggered Kinetic Typography, culminating in a dramatic, delayed reveal of a high-tech "World Network" globe after the text finishes its typing sequence.\n- **Visuals (Radial Masking)**: Replaced traditional `border-radius` with a feathered CSS `radial-gradient` mask (`mask-image`). This completely eliminates the underlying image's hard square background, allowing the world globe to blend seamlessly into the pure black void of the site without clipping its outer orbital rings.
 - **Scroll Syncing**: The globe's entrance animation (`scale` & `opacity`) is strictly tied to the exact same `isInView` state as the text typography, featuring a precise 6-second `delay` to ensure the visual only fades in *after* the backstory is fully revealed. This delay instantly resets via a conditional ternary (`delay: isInView ? 6 : 0`) for perfect consistency during multi-scroll sessions (`once: false`).
 - **Performance Optimization**: Stripped heavy overlapping filters (e.g., combining 100px blur with `animate-pulse`) and continuous coordinate transformations on the animated `.webp` asset. This resolved severe Main Thread blocking that was causing 1-second scrolling freezes, resulting in buttery-smooth performance while maintaining visual grandeur.
 - **Technology**: State-Machine Driven Typing Logic and High-Performance conditional Framer Motion layers.
@@ -56,7 +55,9 @@ Below is the visual and technical roadmap of the portfolio, presented in the ord
 ### 9. **Conversion Node (`components/sections/Contact.tsx`)**
 - **The Experience**: High-impact, cinematic broad-screen section focused on premium professional conversion with a massive "Get In Touch" background typography.
 - **Visuals (Absolute Overlapping)**: Features a massively scaled, absolute-positioned graphic (`z-0`) that functions as an immersive, borderless backdrop. It sits cleanly behind the interactive elements without breaking the grid flow.
-- **Layout & Interactions**: The contact cluster is stripped of heavy card styling in favor of minimalist, circular "Quick Links". These icons feature a deliberate, relaxed lateral entrance animation (`x: 50` to `0` at 1.4s) and responsive magnetic spring physics (`stiffness: 250`) exclusively on cursor hover.\n\n### 10. **Infrastructure Layers (`components/layout/SmoothScroll.tsx`, `components/ui/Separator.tsx`, & `globals.css`)**
+- **Layout & Interactions**: The contact cluster is stripped of heavy card styling in favor of minimalist, circular "Quick Links". These icons feature a deliberate, relaxed lateral entrance animation (`x: 50` to `0` at 1.4s) and responsive magnetic spring physics (`stiffness: 250`) exclusively on cursor hover.
+
+### 10. **Infrastructure Layers (`components/layout/SmoothScroll.tsx`, `components/ui/Separator.tsx`, & `globals.css`)**
 - **Lenis Core**: Managed via a React Context Provider to synchronize all `framer-motion` `whileInView` events globally.
 - **Laser Beam Separators**: 1px dividers with breathing opacity animation to partition major section transitions.
 - **Global Ghost Styling**: Implemented via `.text-outline` in `globals.css` for consistent, high-end transparent typography across the site.
@@ -126,4 +127,4 @@ When animating multiple small components (e.g., contact cards, grid items, or wo
 
 ---
 
-*Crafted for maximum visual impact and precision engineering.*
+*Crafted with passion for maximum visual impact and precision engineering.*
